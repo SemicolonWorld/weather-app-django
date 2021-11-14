@@ -1,0 +1,116 @@
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>weather app</title>
+    <link rel="stylesheet" href="{% static 'weather/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'weather/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'weather/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'weather/css/all.css' %}">
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="main">
+      <nav class="nav">
+        <h1>
+          <i class="fas fa-cloud-moon"></i>
+          weather app
+        </h1>
+        <a
+          href="https://github.com/SemicolonWorld/"
+          target="__blank"
+          class="nav__github"
+        >
+          <i class="fab fa-github"></i>
+        </a>
+      </nav>
+      <section class="section">
+        <form method="POST" class="section__form">
+          {% csrf_token %}
+          <div class="section__form--search">
+            {{ form.city|attr:"placeholder:Search for a city"|as_crispy_field }}
+            <button>
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+
+          {% for field in form %}
+            {% for error in field.errors %}
+            <p class="section__form--error active">{{ error }}</p>
+            {% endfor %}
+          {% endfor %}
+          <p class="section__form--error"></p>
+        </form>
+        {% if main %}
+        <div style="margin: 10px;" class="section__card active">
+          <div class="section__information active">
+            <p class="section__city">
+              <i class="fas fa-map-marker-alt"></i>
+              {{ country.title }}: {{ city_name.title }}
+            </p>
+            <div>
+              <p class="section__weather-icon">
+                {% if icon == '01d' %}
+                  <i class="fas fa-sun"></i>
+                {% elif icon == '01n' %}
+                  <i class="fas fa-moon"></i>
+                {% elif icon == '02d' %}
+                  <i class="fas fa-cloud-sun"></i>
+                {% elif icon == '02n' %}
+                  <i class="fas fa-cloud-moon"></i>
+                {% elif icon == '03d' or icon == '03n' %}
+                  <i class="fas fa-cloud"></i>
+                {% elif icon == '04d' or icon == '04n' %}
+                  <i class="fas fa-clouds"></i>
+                {% elif icon == '09d' or icon == '09n' %}
+                  <i class="fas fa-cloud-drizzle"></i>
+                {% elif icon == '10d' %}
+                  <i class="fas fa-cloud-sun"></i>
+                {% elif icon == '10n' %}
+                  <i class="fas fa-cloud-moon"></i>
+                {% elif icon == '11d' or icon == '11n' %}
+                  <i class="fas fa-thunderstorm"></i>
+                {% elif icon == '13d' or icon == '13n' %}
+                  <i class="fal fa-snowflake"></i>
+                {% elif icon == '50d' or icon == '50n' %}
+                  <i class="fal fa-wind"></i>
+                {% endif %}
+              </p>
+              <p class="section__description">{{ description.title }}</p>
+            </div>
+            <p class="section__celsius">{{ celsius_temp }}° C</p>
+          </div>
+          <p class="section__humidity">humidity: {{ humidity }}%</p>
+        </div>
+        {% elif cod %}
+          {% if cod == '404' %}
+          <div style="margin: 10px;" class="section__card active">
+            <div class="section__information active">
+              <p class="section__city">
+                City Not Found!
+              </p>
+              </div>
+          </div>
+          {% endif %}
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>

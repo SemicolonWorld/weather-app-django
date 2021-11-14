@@ -1,0 +1,172 @@
+:root {
+  --main: #15242b;
+  --secondary: #8774e1;
+  --light: #eee;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "montserrat";
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  padding: 0 2rem;
+  background-color: var(--secondary);
+  color: var(--light);
+}
+.nav h1 {
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+.nav__github {
+  color: var(--light);
+  font-size: 2.5rem;
+  transition: 0.2s;
+}
+.nav__github:hover {
+  color: #fff;
+  filter: drop-shadow(0 0 5px var(--light));
+}
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background: linear-gradient(#00000080, #00000080),
+    url("../images/bg.jpg");
+  background-position: center;
+  object-fit: cover;
+}
+.section__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(0);
+  transition: 0.4s;
+}
+.section__form.active {
+  transform: translateY(-5rem);
+}
+.section__form--search {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.section__form--search input {
+  width: 20rem;
+  padding: 0.4rem 0.6rem;
+  padding-right: 3rem;
+  background-color: #eeeeeed7;
+  color: #222;
+  border: none;
+  border-radius: 10px 2px;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+}
+.section__form--search button {
+  position: absolute;
+  right: 0rem;
+  padding: 7px 10px;
+  background-color: transparent;
+  color: #333;
+  border: none;
+  border-radius: 9px 2px;
+  font-size: 0.9rem;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.section__form button:hover {
+  background-color: var(--secondary);
+  color: var(--light);
+}
+.section__form--error {
+  display: none;
+  padding: 0.3rem 0.5rem;
+  background-color: #dc143cc2;
+  color: var(--light);
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.section__form--error.active {
+  display: block;
+}
+
+.section__card {
+  width: 30rem;
+  padding: 1rem;
+  background-color: var(--light);
+  color: #222;
+  border-radius: 10px;
+  transform: translateY(2rem);
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.section__card.active {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: none;
+}
+.section__information {
+  display: flex;
+  align-items: center;
+}
+.section__information div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.section__information * {
+  flex: 1;
+}
+.section__city {
+  text-transform: uppercase;
+}
+.section__city i {
+  color: #555;
+}
+.section__description {
+  font-size: 1rem;
+  margin-top: 7px;
+}
+.section__weather-icon i {
+  font-size: 1.8rem;
+}
+.section__weather-icon .fa-cloud, .section__weather-icon .fa-clouds, .section__weather-icon .fa-cloud-drizzle, .section__weather-icon .fa-thunderstorm{
+  color: #6f9acc;
+}
+.section__weather-icon .fa-sun, .section__weather-icon .fa-cloud-sun{
+  color: #daa520;
+}
+.section__weather-icon .fa-moon{
+  color: #ffba24;
+}
+
+.section__weather-icon .fa-cloud-moon{
+  color: #A6A298;
+}
+
+.section__weather-icon .fa-snowflake, .section__weather-icon .fa-wind{
+  color: #5AFFDF;
+}
+
+.section__celsius {
+  font-size: 2rem;
+}
+.section__humidity {
+  margin-top: 2rem;
+  font-size: 1rem;
+}
